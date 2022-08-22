@@ -1,7 +1,12 @@
 import styled from "styled-components";
+import Header from "../header";
 
 const Homepage = () => {
-  return <Wrapper>HomePage</Wrapper>;
+  return (
+    <Wrapper>
+      <Header />
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.div`

@@ -1,11 +1,29 @@
 import styled from "styled-components";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/CBC-News-Logo.jpg";
-import loginIcon from "../assets/login.svg";
-// import AuthNav from "../components/Auth/auth-nav";
-// import Profile from "./profile";
+import { AllContext } from "./Context/allContext";
+import { useContext, useEffect, useState } from "react";
+import AuthNav from "../components/Auth/auth-nav";
 
 const Header = () => {
+  const { categories } = useContext(AllContext);
+  const [speceficUser, setSpeceficUser] = useState();
+
+  const userId = JSON.parse(localStorage.getItem("userID"));
+
+  useEffect(() => {
+    if (userId) {
+      const getUserFromDb = async () => {
+        const response = await fetch(`/api/user/${userId.id}`);
+        const result = await response.json();
+        setSpeceficUser(result.data);
+      };
+      getUserFromDb();
+    } else {
+      return null;
+    }
+  }, [categories]);
+
   return (
     <Wrapper>
       <Navigation>
@@ -13,19 +31,28 @@ const Header = () => {
           <ImageLogo src={logo} />
         </Link>
         <LinkDiv>
-          <StyledLink to="#">All</StyledLink>
-          <StyledLink to="#">Politics</StyledLink>
-          <StyledLink to="#">Sports</StyledLink>
-          <StyledLink to="#">Ecconomics</StyledLink>
+          {speceficUser && speceficUser.admin ? (
+            <StyledLink to="/dashboard/addNews" style={{ color: "#eb1f28" }}>
+              Dashboard
+            </StyledLink>
+          ) : null}
+          {categories.length !== 0 ? (
+            <StyledLink to="/allNews">All</StyledLink>
+          ) : null}
+          {categories.map((category, index) => {
+            return (
+              <StyledLink to={`/category/${category}`} key={index}>
+                {category.replace(/^./, category[0].toUpperCase())}
+              </StyledLink>
+            );
+          })}
         </LinkDiv>
       </Navigation>
       <SearchContainer>
-        <SearchInput placeholder="Search product here" />
+        <SearchInput placeholder="Search news here" />
         <SearchButton />
       </SearchContainer>
-      <Link to={"/"}>
-        <LoginIconImg src={loginIcon}></LoginIconImg>
-      </Link>
+      <AuthNav />
     </Wrapper>
   );
 };
@@ -52,14 +79,6 @@ const LinkDiv = styled.div`
   margin-left: 30px;
 `;
 
-const LoginIconImg = styled.img`
-  width: 30px;
-  height: 30px;
-  position: relative;
-  margin-bottom: 20px;
-  margin-right: 20px;
-`;
-
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: #292929;
@@ -84,7 +103,7 @@ const SearchContainer = styled.div`
   border: 1px solid gray;
   position: absolute;
   right: 0;
-  margin-right: 80px;
+  margin-right: 100px;
   margin-bottom: 22px;
 `;
 

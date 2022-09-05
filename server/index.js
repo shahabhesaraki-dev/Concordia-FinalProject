@@ -6,7 +6,21 @@ const morgan = require("morgan");
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
 
-const { addNews, getAllNews, getNewsById } = require("./handler");
+const {
+  addNews,
+  getAllNews,
+  getNewsById,
+  getCategories,
+  getImage,
+  getLastNews,
+  newsByCategory,
+  updateView,
+  getNewsByViews,
+  getAllUsers,
+  addNewUser,
+  getUserById,
+  getRandomNews,
+} = require("./handler");
 
 const PORT = 8000;
 
@@ -30,8 +44,17 @@ express()
 
   /// REST endpoints
 
-  .get("/getAllNews", getAllNews)
-  .get("/getNews/:id", getNewsById)
-  .post("/addNews", upload.single("image"), addNews)
-
+  .get("/api/getAllNews", getAllNews)
+  .get("/api/getNews/:id", getNewsById)
+  .post("/api/dashboard/addNews", upload.single("file"), addNews)
+  .get("/api/getCategories", getCategories)
+  .get("/image/:key", getImage)
+  .get("/api/getLastNews", getLastNews)
+  .get("/api/category/:categoryName", newsByCategory)
+  .patch("/api/:id", updateView)
+  .get("/api/getNewsByViews", getNewsByViews)
+  .get("/api/users", getAllUsers)
+  .get("/api/user/:id", getUserById)
+  .post("/api/addNewUser", addNewUser)
+  .get("/api/getRandomNews", getRandomNews)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

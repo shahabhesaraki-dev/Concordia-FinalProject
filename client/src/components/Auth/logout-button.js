@@ -1,20 +1,36 @@
 import React from "react";
+import styled from "styled-components";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const LogoutButton = () => {
   const { logout } = useAuth0();
   return (
-    <button
-      onClick={() =>
+    <Button
+      onClick={() => {
+        window.localStorage.removeItem("LogIn");
+        window.localStorage.removeItem("userID");
         logout({
-          //use location
           returnTo: window.location.origin,
-        })
-      }
+        });
+      }}
     >
       Log Out
-    </button>
+    </Button>
   );
 };
+
+const Button = styled.button`
+  width: 80px;
+  height: 41px;
+  margin-top: -21px;
+  font-size: 16px;
+  background-color: #eb1f28;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  &:hover {
+    font-size: 17px;
+  }
+`;
 
 export default LogoutButton;

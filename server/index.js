@@ -20,6 +20,10 @@ const {
   addNewUser,
   getUserById,
   getRandomNews,
+  addComment,
+  getComments,
+  getCommentsByPostId,
+  searchedNews,
 } = require("./handler");
 
 const PORT = 8000;
@@ -57,4 +61,8 @@ express()
   .get("/api/user/:id", getUserById)
   .post("/api/addNewUser", addNewUser)
   .get("/api/getRandomNews", getRandomNews)
+  .post("/api/addComment", addComment)
+  .get("/api/getComments", getComments)
+  .get("/api/getCommentsByPostId/:id", getCommentsByPostId)
+  .get("/api/searchedNews/:searchContent", searchedNews)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

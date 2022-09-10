@@ -3,6 +3,7 @@ import Header from "../header";
 import { AllContext } from "../Context/allContext";
 import { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
+import Spinner from "../spinner";
 
 const AllNews = () => {
   const history = useHistory();
@@ -15,38 +16,42 @@ const AllNews = () => {
         <h2>All News</h2>
         <Line />
       </ProductsSectionTitle>
-      {allNews.map((news, index) => {
-        return (
-          <Wrapper key={index}>
-            <ImageSection>
-              <Link to={`/news/${news._id}`}>
-                <Image src={`/image/${news.image}`} />
-              </Link>
-            </ImageSection>
-            <DetailsSection>
-              <Category>{news.category}</Category>
-              <Title>{news.title}</Title>
-              <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
-              <Button
-                onClick={() => {
-                  fetch(`/api/${news._id}`, {
-                    method: "PATCH",
-                    headers: {
-                      "Content-Type": "application/json",
-                    },
-                  }).then((result) => {
-                    return result.json();
-                  });
+      {allNews.length !== 0 ? (
+        allNews.map((news, index) => {
+          return (
+            <Wrapper key={index}>
+              <ImageSection>
+                <Link to={`/news/${news._id}`}>
+                  <Image src={`/image/${news.image}`} />
+                </Link>
+              </ImageSection>
+              <DetailsSection>
+                <Category>{news.category}</Category>
+                <Title>{news.title}</Title>
+                <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
+                <Button
+                  onClick={() => {
+                    fetch(`/api/${news._id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                    }).then((result) => {
+                      return result.json();
+                    });
 
-                  history.push(`/news/${news._id}`);
-                }}
-              >
-                Read more
-              </Button>
-            </DetailsSection>
-          </Wrapper>
-        );
-      })}
+                    history.push(`/news/${news._id}`);
+                  }}
+                >
+                  Read more
+                </Button>
+              </DetailsSection>
+            </Wrapper>
+          );
+        })
+      ) : (
+        <Spinner />
+      )}
     </>
   );
 };

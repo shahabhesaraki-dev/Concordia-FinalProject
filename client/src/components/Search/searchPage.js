@@ -1,33 +1,34 @@
-import { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../header";
+import { Link, useHistory, useParams } from "react-router-dom";
 import Spinner from "../spinner";
+import { useEffect, useState } from "react";
 
-const NewsByCategory = () => {
+const SearchPage = () => {
   const history = useHistory();
-  const { categoryName } = useParams();
-  const [newsByCategory, setNewsByCtegory] = useState();
+  const { searchContent } = useParams();
+
+  const [searchedNews, setSearchNews] = useState();
 
   useEffect(() => {
-    const getNewByCategory = async () => {
-      const response = await fetch(`/api/category/${categoryName}`);
+    const getSearchItems = async () => {
+      const response = await fetch(`/api/searchedNews/${searchContent}`);
       const result = await response.json();
-      setNewsByCtegory(result.data);
+      setSearchNews(result.data);
     };
-    getNewByCategory();
-  }, [categoryName]);
+    getSearchItems();
+    // eslint-disable-next-line
+  }, [searchContent]);
 
   return (
     <>
       <Header />
       <ProductsSectionTitle>
-        <h2>{categoryName} News</h2>
+        <h2>Serached News</h2>
         <Line />
       </ProductsSectionTitle>
-      {newsByCategory ? (
-        newsByCategory.map((news, index) => {
+      {searchedNews ? (
+        searchedNews.map((news, index) => {
           return (
             <Wrapper key={index}>
               <ImageSection>
@@ -38,7 +39,7 @@ const NewsByCategory = () => {
               <DetailsSection>
                 <Category>{news.category}</Category>
                 <Title>{news.title}</Title>
-                <Summary>{`${news.description.substring(0, 200)}...`}</Summary>
+                <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
                 <Button
                   onClick={() => {
                     fetch(`/api/${news._id}`, {
@@ -124,7 +125,6 @@ const Title = styled.p`
 
 const Summary = styled.p`
   font-family: "Poppins", sans-serif;
-  line-height: 1.5;
 `;
 
 const Button = styled.button`
@@ -144,4 +144,4 @@ const Button = styled.button`
   }
 `;
 
-export default NewsByCategory;
+export default SearchPage;

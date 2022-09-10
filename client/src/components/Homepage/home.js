@@ -11,12 +11,12 @@ const Homepage = () => {
       <Wrapper>
         <Slider />
         <ProductsSectionTitle>
-          <h2>Last News</h2>
+          <H2>Last News</H2>
           <Line />
         </ProductsSectionTitle>
         <LastNews />
         <ProductsSectionTitle>
-          <h2>Popular News</h2>
+          <H2>Popular News</H2>
           <Line />
         </ProductsSectionTitle>
         <PopularNews />
@@ -53,6 +53,12 @@ const Line = styled.hr`
   width: 100%;
   border: 1px solid lightgray;
   position: absolute;
+`;
+
+const H2 = styled.h2`
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 25px;
 `;
 
 export default Homepage;

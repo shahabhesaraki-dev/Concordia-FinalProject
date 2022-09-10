@@ -7,12 +7,11 @@ import AddNews from "./Dashboard/addNews";
 import AllNews from "./News/allNews";
 import NewsDetail from "./News/newsDetail";
 import NewsByCategory from "./News/newsByCategory";
-// import GlobalStyle from "./GlobalStyle";
+import SearchPage from "./Search/searchPage";
 
 const App = () => {
   return (
     <BrowserRouter>
-      {/* <GlobalStyle /> */}
       <Auth0ProviderWithHistory>
         <Wrapper>
           <Switch>
@@ -30,6 +29,9 @@ const App = () => {
             </Route>
             <Route path="/dashboard/addNews">
               <AddNews />
+            </Route>
+            <Route path="/search/:searchContent">
+              <SearchPage />
             </Route>
           </Switch>
         </Wrapper>

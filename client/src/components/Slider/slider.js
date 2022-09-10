@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { AllContext } from "../Context/allContext";
 import { useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
+import Spinner from "../spinner";
 
 const Slider = () => {
   const history = useHistory();
@@ -44,7 +45,7 @@ const Slider = () => {
           {`<`}
         </MinusButton>
       )}
-      {randomNews && (
+      {randomNews ? (
         <Wrapper>
           <Image
             src={`/image/${randomNews[currentIndex].image}`}
@@ -64,6 +65,8 @@ const Slider = () => {
           <Title>{randomNews[currentIndex].title}</Title>
           <Category>{randomNews[currentIndex].category}</Category>
         </Wrapper>
+      ) : (
+        <Spinner />
       )}
       {currentIndex < 3 ? (
         <PlusButton onClick={() => setCurrentIndex(currentIndex + 1)}>

@@ -2,8 +2,12 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import Header from "../header";
+import Comments from "../comments";
+import Spinner from "../spinner";
 const NewsDetail = () => {
   const { id } = useParams();
+
+  const userIsLogin = localStorage.getItem("LogIn");
 
   const [speceficNews, setSpeceficNews] = useState();
   const [finalText, setFinalText] = useState("");
@@ -17,6 +21,7 @@ const NewsDetail = () => {
       setFinalText(finalText);
     };
     getNewsById();
+    // eslint-disable-next-line
   }, []);
 
   const NewlineText = (props) => {
@@ -37,7 +42,16 @@ const NewsDetail = () => {
           <Category>{speceficNews.category}</Category>
           <NewlineText text={finalText} />
         </Wrapper>
+      ) : (
+        <Spinner />
+      )}
+      {userIsLogin ? (
+        <ProductsSectionTitle>
+          <H2>Leave a comment</H2>
+          <Line />
+        </ProductsSectionTitle>
       ) : null}
+      {userIsLogin ? <Comments id={id} /> : null}
     </>
   );
 };
@@ -74,6 +88,35 @@ const Description = styled.p`
   width: 60%;
   min-width: 400px;
   white-space: pre-line;
+`;
+
+const ProductsSectionTitle = styled.div`
+  height: 80px;
+  position: relative;
+  right: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  & h2 {
+    font-weight: 400;
+    z-index: 1;
+    background-color: #fff;
+    padding: 0 30px;
+  }
+`;
+
+const Line = styled.hr`
+  width: 60%;
+  border: 1px solid lightgray;
+  position: absolute;
+`;
+
+const H2 = styled.h2`
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-size: 25px;
 `;
 
 export default NewsDetail;

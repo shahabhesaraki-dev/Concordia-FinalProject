@@ -1,13 +1,15 @@
 import styled from "styled-components";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useHistory } from "react-router-dom";
 import logo from "../assets/CBC-News-Logo.jpg";
 import { AllContext } from "./Context/allContext";
 import { useContext, useEffect, useState } from "react";
 import AuthNav from "../components/Auth/auth-nav";
 
 const Header = () => {
+  const history = useHistory();
   const { categories } = useContext(AllContext);
   const [speceficUser, setSpeceficUser] = useState();
+  const [serachInput, setSearchInput] = useState();
 
   const userId = JSON.parse(localStorage.getItem("userID"));
 
@@ -22,6 +24,7 @@ const Header = () => {
     } else {
       return null;
     }
+    // eslint-disable-next-line
   }, [categories]);
 
   return (
@@ -49,8 +52,25 @@ const Header = () => {
         </LinkDiv>
       </Navigation>
       <SearchContainer>
-        <SearchInput placeholder="Search news here" />
-        <SearchButton />
+        <SearchInput
+          value={serachInput || ""}
+          onChange={(e) => {
+            setSearchInput(e.target.value);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              history.push(`/search/${serachInput}`);
+            }
+          }}
+          placeholder="Search the news"
+        />
+        <SearchButton
+          onClick={() => {
+            if (serachInput.length !== 0) {
+              history.push(`/search/${serachInput}`);
+            }
+          }}
+        />
       </SearchContainer>
       <AuthNav />
     </Wrapper>

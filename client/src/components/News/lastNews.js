@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import Spinner from "../spinner";
 
 const LastNews = () => {
   const history = useHistory();
@@ -15,32 +16,36 @@ const LastNews = () => {
 
   return (
     <Wrapper>
-      {lastNews.map((news, index) => {
-        return (
-          <NewsSection key={index}>
-            <Image src={`/image/${news.image}`} />
-            <Button
-              onClick={() => {
-                fetch(`/api/${news._id}`, {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                }).then((result) => {
-                  return result.json();
-                });
+      {lastNews.length !== 0 ? (
+        lastNews.map((news, index) => {
+          return (
+            <NewsSection key={index}>
+              <Image src={`/image/${news.image}`} />
+              <Button
+                onClick={() => {
+                  fetch(`/api/${news._id}`, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  }).then((result) => {
+                    return result.json();
+                  });
 
-                history.push(`/news/${news._id}`);
-              }}
-            >
-              Read more
-            </Button>
-            <Category>{news.category}</Category>
-            <Title>{news.title}</Title>
-            <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
-          </NewsSection>
-        );
-      })}
+                  history.push(`/news/${news._id}`);
+                }}
+              >
+                Read more
+              </Button>
+              <Category>{news.category}</Category>
+              <Title>{news.title}</Title>
+              <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
+            </NewsSection>
+          );
+        })
+      ) : (
+        <Spinner />
+      )}
     </Wrapper>
   );
 };
@@ -111,7 +116,8 @@ const Title = styled.p`
 `;
 
 const Summary = styled.p`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 `;
 
 export default LastNews;

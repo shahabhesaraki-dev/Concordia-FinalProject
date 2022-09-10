@@ -69,7 +69,17 @@ const AddNews = () => {
               setFile(e.target.files[0]);
             }}
           />
-          <Button onClick={postNews}>Submit</Button>
+          {title.length !== 0 &&
+          category.length !== 0 &&
+          description.length !== 0 &&
+          file ? (
+            <Button onClick={postNews}>Submit</Button>
+          ) : (
+            <>
+              <Button>Submit</Button>
+              <Warning>*All the fields are required!</Warning>
+            </>
+          )}
         </Wrapper>
       </Section>
     </>
@@ -78,7 +88,6 @@ const AddNews = () => {
 
 const Section = styled.div`
   display: flex;
-  justify-content: center;
   padding: 60px;
 `;
 
@@ -88,26 +97,30 @@ const Wrapper = styled.div`
   border: 1px solid black;
   border-radius: 5px;
   width: 70%;
-  min-height: 80vh;
-  background-color: azure;
+  padding: 30px 10px;
+  background-color: #f5f5f5;
 `;
 
 const Title = styled.h1`
-  font-size: 50px;
-  font-family: "Poppins", sans-serif;
+  font-size: 40px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   text-align: center;
+  margin-top: -15px;
 `;
 
 const Label = styled.label`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   font-weight: 200;
-  font-size: 18px;
+  font-size: 17px;
   margin-left: 20px;
   margin-top: 5px;
 `;
 
 const Input = styled.input`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   width: 50%;
   padding: 10px;
   margin-left: 20px;
@@ -115,10 +128,12 @@ const Input = styled.input`
   font-size: 15px;
   border-radius: 5px;
   outline: none;
+  border: 1px solid #a4a7ab;
 `;
 
 const FileInput = styled.input`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   width: 25%;
   padding: 10px;
   margin-left: 20px;
@@ -128,7 +143,8 @@ const FileInput = styled.input`
 `;
 
 const Textarea = styled.textarea`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   width: 50%;
   padding: 10px;
   margin-left: 20px;
@@ -139,17 +155,24 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
-  font-family: "Poppins", sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
   padding: 10px 40px;
   width: 140px;
   text-align: center;
-  background-color: #4681b6;
+  background-color: #413d3e;
   color: white;
   border-radius: 5px;
   border: none;
   font-size: 20px;
   margin-left: 25px;
   margin-top: 20px;
+`;
+
+const Warning = styled.h4`
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: red;
 `;
 
 export default AddNews;

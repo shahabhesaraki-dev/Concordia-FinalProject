@@ -372,6 +372,109 @@ const getRandomNews = async (req, res) => {
   }
 };
 
+const addComment = async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const comment = req.body.comment;
+  const postId = req.body.postId;
+
+  console.log(postId);
+
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    await db.collection("comments").insertOne({
+      name: name,
+      email: email,
+      comment: comment,
+      postId: postId,
+    });
+    client.close();
+
+    res.status(200).json({
+      status: 200,
+      message: `Comment successfully added!`,
+    });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
+const getComments = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db.collection("comments").find().toArray();
+    client.close();
+
+    result.length > 0
+      ? res.status(200).json({
+          status: 200,
+          data: result,
+          message: `All Comments are loaded!`,
+        })
+      : res.status(404).json({
+          status: 404,
+          message: `Couldn't find any comment!`,
+        });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
+const getCommentsByPostId = async (req, res) => {
+  const { id } = req.params;
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db
+      .collection("comments")
+      .find({ postId: id })
+      .toArray();
+    client.close();
+
+    res.status(200).json({
+      status: 200,
+      data: result,
+      message: `All Comments are loaded!`,
+    });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
+const searchedNews = async (req, res) => {
+  const { searchContent } = req.params;
+  const client = new MongoClient(MONGO_URI);
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db
+      .collection("news")
+      .find({ title: { $regex: searchContent, $options: "i" } })
+      .toArray();
+
+    client.close();
+
+    result.length > 0
+      ? res.status(200).json({
+          status: 200,
+          data: result,
+          message: `News found!`,
+        })
+      : res.status(404).json({
+          status: 404,
+          data: `search content: ${searchContent}`,
+          message: `Couldn't find any news!`,
+        });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
 module.exports = {
   getAllNews,
   addNews,
@@ -386,4 +489,8 @@ module.exports = {
   addNewUser,
   getUserById,
   getRandomNews,
+  addComment,
+  getComments,
+  getCommentsByPostId,
+  searchedNews,
 };

@@ -7,6 +7,7 @@ export const AllContextProvider = ({ children }) => {
   const [categories, setAllCategories] = useState([]);
   const [userDetails, setUserDetails] = useState();
   const [allUsers, setAllUsers] = useState();
+  const [allComments, setAllComments] = useState();
 
   useEffect(() => {
     const getAllNews = async () => {
@@ -27,14 +28,28 @@ export const AllContextProvider = ({ children }) => {
       setAllUsers(result.data);
     };
 
+    const getAllComments = async () => {
+      const response = await fetch("/api/getComments");
+      const result = await response.json();
+      setAllComments(result.data);
+    };
+
     getAllNews();
     getAllCategories();
     getAllUsers();
+    getAllComments();
   }, []);
 
   return (
     <AllContext.Provider
-      value={{ allNews, categories, userDetails, setUserDetails, allUsers }}
+      value={{
+        allNews,
+        categories,
+        userDetails,
+        setUserDetails,
+        allUsers,
+        allComments,
+      }}
     >
       {children}
     </AllContext.Provider>

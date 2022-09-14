@@ -24,6 +24,7 @@ const {
   getComments,
   getCommentsByPostId,
   searchedNews,
+  getRandomNewsByCategory,
 } = require("./handler");
 
 const PORT = 8000;
@@ -47,7 +48,6 @@ express()
   .use("/", express.static(__dirname + "/"))
 
   /// REST endpoints
-
   .get("/api/getAllNews", getAllNews)
   .get("/api/getNews/:id", getNewsById)
   .post("/api/dashboard/addNews", upload.single("file"), addNews)
@@ -65,4 +65,5 @@ express()
   .get("/api/getComments", getComments)
   .get("/api/getCommentsByPostId/:id", getCommentsByPostId)
   .get("/api/searchedNews/:searchContent", searchedNews)
+  .get("/api/getRandomNewsByCategory/:category", getRandomNewsByCategory)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

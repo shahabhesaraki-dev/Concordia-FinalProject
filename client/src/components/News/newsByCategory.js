@@ -38,7 +38,9 @@ const NewsByCategory = () => {
               <DetailsSection>
                 <Category>{news.category}</Category>
                 <Title>{news.title}</Title>
-                <Summary>{`${news.description.substring(0, 200)}...`}</Summary>
+                <Summary>{`${news.description
+                  .substring(0, 200)
+                  .replace(/<\/?[^>]+(>|$)/g, "")}...`}</Summary>
                 <Button
                   onClick={() => {
                     fetch(`/api/${news._id}`, {

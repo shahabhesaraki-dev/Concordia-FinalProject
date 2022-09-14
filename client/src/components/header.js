@@ -35,7 +35,13 @@ const Header = () => {
         </Link>
         <LinkDiv>
           {speceficUser && speceficUser.admin ? (
-            <StyledLink to="/dashboard/addNews" style={{ color: "#eb1f28" }}>
+            <StyledLink
+              onClick={() => {
+                window.localStorage.removeItem("newPost");
+              }}
+              to="/dashboard/addNews"
+              style={{ color: "#eb1f28" }}
+            >
               Dashboard
             </StyledLink>
           ) : null}
@@ -125,6 +131,10 @@ const SearchContainer = styled.div`
   right: 0;
   margin-right: 100px;
   margin-bottom: 22px;
+
+  @media (max-width: 1065px) {
+    display: none;
+  }
 `;
 
 const SearchInput = styled.input`

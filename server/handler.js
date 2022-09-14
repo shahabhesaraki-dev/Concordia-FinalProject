@@ -53,11 +53,12 @@ const addNews = async (req, res) => {
       category: req.body.category,
     };
     const db = client.db("final-project");
-    await db.collection("news").insertOne(newsData);
+    const finalResult = await db.collection("news").insertOne(newsData);
     client.close();
 
     res.status(200).json({
       status: 200,
+      reservedId: finalResult.insertedId.toString(),
       message: `News successfully added!`,
     });
   } catch (err) {
@@ -347,8 +348,7 @@ const getRandomNews = async (req, res) => {
       .sort({ _id: -1 })
       .limit(10)
       .toArray();
-    // .aggregate([{ $sample: { size: 3 } }])
-    //
+
     client.close();
 
     const getThreeRandomItem = (array, num) => {
@@ -475,6 +475,43 @@ const searchedNews = async (req, res) => {
   }
 };
 
+const getRandomNewsByCategory = async (req, res) => {
+  const { category } = req.params;
+  const client = new MongoClient(MONGO_URI, options);
+
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db
+      .collection("news")
+      .find({ category: category })
+      .sort({ _id: -1 })
+      .limit(10)
+      .toArray();
+
+    client.close();
+
+    const getThreeRandomItem = (array, num) => {
+      const shuffled = [...array].sort(() => 0.5 - Math.random());
+
+      return shuffled.slice(0, num);
+    };
+
+    result
+      ? res.status(200).json({
+          status: 200,
+          data: getThreeRandomItem(result, 4),
+          message: "Random news by category have been found.",
+        })
+      : res.status(400).json({
+          status: 404,
+          message: "No news is available",
+        });
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
 module.exports = {
   getAllNews,
   addNews,
@@ -493,4 +530,5 @@ module.exports = {
   getComments,
   getCommentsByPostId,
   searchedNews,
+  getRandomNewsByCategory,
 };

@@ -4,66 +4,94 @@ import styled from "styled-components";
 import Header from "../header";
 import Comments from "../comments";
 import Spinner from "../spinner";
+import RandomNewsByCategory from "./randomNewsByCategory";
+
 const NewsDetail = () => {
   const { id } = useParams();
 
   const userIsLogin = localStorage.getItem("LogIn");
 
   const [speceficNews, setSpeceficNews] = useState();
-  const [finalText, setFinalText] = useState("");
 
   useEffect(() => {
     const getNewsById = async () => {
       const response = await fetch(`/api/getNews/${id}`);
       const result = await response.json();
       setSpeceficNews(result.data);
-      const finalText = await result.data.description;
-      setFinalText(finalText);
     };
     getNewsById();
     // eslint-disable-next-line
   }, []);
 
-  const NewlineText = (props) => {
-    const text = props.text;
-    const detail = text
-      .split("\\n")
-      .map((str, index) => <Description key={index}>{str}</Description>);
-    return detail;
-  };
-
   return (
     <>
       <Header />
+      <Wrapper>
+        {speceficNews ? (
+          <SpeceficNewsSection>
+            <Title>{speceficNews.title}</Title>
+            <Image src={`/image/${speceficNews.image}`} />
+            <Category>{speceficNews.category}</Category>
+            <Description
+              dangerouslySetInnerHTML={{ __html: speceficNews.description }}
+            />
+          </SpeceficNewsSection>
+        ) : (
+          <Spinner />
+        )}
+        <RandomNewsSection>
+          {speceficNews ? (
+            <RandomNewsByCategory
+              category={speceficNews.category}
+              id={speceficNews._id}
+            />
+          ) : (
+            <RandomNewsByCategory />
+          )}
+        </RandomNewsSection>
+      </Wrapper>
       {speceficNews ? (
-        <Wrapper>
-          <Title>{speceficNews.title}</Title>
-          <Image src={`/image/${speceficNews.image}`} />
-          <Category>{speceficNews.category}</Category>
-          <NewlineText text={finalText} />
-        </Wrapper>
-      ) : (
-        <Spinner />
-      )}
-      {userIsLogin ? (
-        <ProductsSectionTitle>
-          <H2>Leave a comment</H2>
-          <Line />
-        </ProductsSectionTitle>
+        userIsLogin ? (
+          <>
+            <CommentSectionTitle>
+              <H2>Leave a comment</H2>
+              <Line />
+            </CommentSectionTitle>
+            <Comments id={id} />
+          </>
+        ) : (
+          <H4>
+            Please log in if you want to add a comment or read all of the
+            comments.
+          </H4>
+        )
       ) : null}
-      {userIsLogin ? <Comments id={id} /> : null}
     </>
   );
 };
 
 const Wrapper = styled.div`
   display: flex;
+  width: 100%;
+`;
+
+const RandomNewsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  margin-top: 100px;
+  margin-right: 50px;
+`;
+
+const SpeceficNewsSection = styled.div`
+  display: flex;
   flex-direction: column;
   padding: 10px 70px;
+  width: 70%;
 `;
 
 const Image = styled.img`
-  width: 60%;
+  width: 90%;
   min-width: 400px;
   height: 400px;
 `;
@@ -78,19 +106,18 @@ const Title = styled.h1`
   font-family: "Poppins", sans-serif;
   font-weight: 800;
   font-size: 45px;
-  width: 60%;
+  width: 90%;
   min-width: 400px;
 `;
 
 const Description = styled.p`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  width: 60%;
-  min-width: 400px;
+  width: 90%;
   white-space: pre-line;
 `;
 
-const ProductsSectionTitle = styled.div`
+const CommentSectionTitle = styled.div`
   height: 80px;
   position: relative;
   right: 200px;
@@ -117,6 +144,18 @@ const H2 = styled.h2`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   font-size: 25px;
+`;
+
+const H4 = styled.h4`
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 2px;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: grey;
+  width: 40%;
+  text-align: center;
+  margin-left: 140px;
 `;
 
 export default NewsDetail;

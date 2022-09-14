@@ -41,7 +41,7 @@ const Comments = ({ id }) => {
       }
     };
     getCommentsByPostId();
-  }, [id, messages]);
+  }, [id]);
 
   return (
     <Wrapper>
@@ -80,7 +80,7 @@ const Comments = ({ id }) => {
         )}
       </FormSection>
       <CommentSection>
-        {messages ? <Title>All messages</Title> : null}
+        {messages && messages.length !== 0 ? <Title>All messages</Title> : null}
         {messages &&
           messages.map((message, index) => {
             return (

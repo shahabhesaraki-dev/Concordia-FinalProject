@@ -6,6 +6,7 @@ import Spinner from "../spinner";
 const LastNews = () => {
   const history = useHistory();
   const [lastNews, setLastNews] = useState([]);
+
   useEffect(() => {
     fetch("/api/getLastNews").then((response) => {
       return response.json().then((result) => {
@@ -39,7 +40,9 @@ const LastNews = () => {
               </Button>
               <Category>{news.category}</Category>
               <Title>{news.title}</Title>
-              <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
+              <Summary>{`${news.description
+                .substring(0, 100)
+                .replace(/<\/?[^>]+(>|$)/g, "")}...`}</Summary>
             </NewsSection>
           );
         })

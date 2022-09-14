@@ -1,14 +1,16 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
 import Header from "../header";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 const AddNews = () => {
-  const history = useHistory();
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
+
+  const newPostApproved = localStorage.getItem("newPost");
 
   const postNews = () => {
     const formData = new FormData();
@@ -17,18 +19,24 @@ const AddNews = () => {
     formData.append("description", description);
     formData.append("file", file);
 
-    fetch("/dashboard/addNews", {
+    fetch("/api/dashboard/addNews", {
       method: "POST",
       body: formData,
     })
-      .then((result) => {
-        return result.json();
-      })
       .then((response) => {
-        return response;
+        return response.json();
+      })
+      .then((result) => {
+        localStorage.setItem("newPost", JSON.stringify(result.reservedId));
+        return result;
+      })
+      .then(() => {
+        setTitle("");
+        setCategory("");
+        setDescription("");
+        setFile("");
+        window.location.reload();
       });
-
-    history.push("/");
   };
 
   return (
@@ -37,10 +45,13 @@ const AddNews = () => {
       <Section>
         <Wrapper>
           <Title>Add News</Title>
+          {newPostApproved ? (
+            <Success>A new post was successfully published.</Success>
+          ) : null}
           <Label>Title</Label>
           <Input
             type="text"
-            value={title}
+            value={title || ""}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
@@ -48,20 +59,25 @@ const AddNews = () => {
           <Label>Category</Label>
           <Input
             type="text"
-            value={category}
+            value={category || ""}
             onChange={(e) => {
               setCategory(e.target.value);
             }}
           />
           <Label>Description</Label>
-          <Textarea
+          {/* <Textarea
             rows="6"
             value={description}
             onChange={(e) => {
               setDescription(e.target.value);
             }}
+          /> */}
+          <StyledReactQuill
+            theme="snow"
+            value={description || ""}
+            onChange={setDescription}
           />
-          <Label>Image</Label>
+          <ImageLabel>Image</ImageLabel>
           <FileInput
             type="file"
             accept="image/*"
@@ -126,9 +142,17 @@ const Input = styled.input`
   margin-left: 20px;
   margin-top: 5px;
   font-size: 15px;
-  border-radius: 5px;
   outline: none;
-  border: 1px solid #a4a7ab;
+  border: 1px solid #ccc;
+`;
+
+const ImageLabel = styled.label`
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  font-weight: 200;
+  font-size: 17px;
+  margin-left: 20px;
+  margin-top: 25px;
 `;
 
 const FileInput = styled.input`
@@ -142,16 +166,15 @@ const FileInput = styled.input`
   margin-top: 5px;
 `;
 
-const Textarea = styled.textarea`
+const StyledReactQuill = styled(ReactQuill)`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
-  width: 50%;
-  padding: 10px;
+  width: 90%;
+  /* padding: 10px; */
   margin-left: 20px;
-  font-size: 15px;
-  border-radius: 5px;
-  outline: none;
-  margin-top: 5px;
+  margin-top: 10px;
+  height: 250px;
+  background-color: white;
 `;
 
 const Button = styled.button`
@@ -173,6 +196,12 @@ const Warning = styled.h4`
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
   color: red;
+`;
+
+const Success = styled.h4`
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: green;
 `;
 
 export default AddNews;

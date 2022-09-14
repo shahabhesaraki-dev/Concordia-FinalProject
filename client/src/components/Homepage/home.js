@@ -10,15 +10,15 @@ const Homepage = () => {
       <Header />
       <Wrapper>
         <Slider />
-        <ProductsSectionTitle>
+        <SectionTitle>
           <H2>Last News</H2>
           <Line />
-        </ProductsSectionTitle>
+        </SectionTitle>
         <LastNews />
-        <ProductsSectionTitle>
+        <SectionTitle>
           <H2>Popular News</H2>
           <Line />
-        </ProductsSectionTitle>
+        </SectionTitle>
         <PopularNews />
       </Wrapper>
     </>
@@ -31,7 +31,7 @@ const Wrapper = styled.div`
   padding: 40px 70px;
 `;
 
-const ProductsSectionTitle = styled.div`
+const SectionTitle = styled.div`
   height: 80px;
   position: relative;
   display: flex;

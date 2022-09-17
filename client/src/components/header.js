@@ -132,7 +132,7 @@ const SearchContainer = styled.div`
   margin-right: 100px;
   margin-bottom: 22px;
 
-  @media (max-width: 1065px) {
+  @media (max-width: 1200px) {
     display: none;
   }
 `;

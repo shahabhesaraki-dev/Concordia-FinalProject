@@ -20,46 +20,55 @@ const SearchPage = () => {
     // eslint-disable-next-line
   }, [searchContent]);
 
+  console.log(searchedNews);
+
   return (
     <>
       <Header />
       <ProductsSectionTitle>
-        <h2>Serached News</h2>
+        <h4>Search results for "{searchContent}"</h4>
         <Line />
       </ProductsSectionTitle>
       {searchedNews ? (
-        searchedNews.map((news, index) => {
-          return (
-            <Wrapper key={index}>
-              <ImageSection>
-                <Link to={`/news/${news._id}`}>
-                  <Image src={`/image/${news.image}`} />
-                </Link>
-              </ImageSection>
-              <DetailsSection>
-                <Category>{news.category}</Category>
-                <Title>{news.title}</Title>
-                <Summary>{`${news.description.substring(0, 100)}...`}</Summary>
-                <Button
-                  onClick={() => {
-                    fetch(`/api/${news._id}`, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    }).then((result) => {
-                      return result.json();
-                    });
+        searchedNews.length !== 0 ? (
+          searchedNews.map((news, index) => {
+            return (
+              <Wrapper key={index}>
+                <ImageSection>
+                  <Link to={`/news/${news._id}`}>
+                    <Image src={`/image/${news.image}`} />
+                  </Link>
+                </ImageSection>
+                <DetailsSection>
+                  <Category>{news.category}</Category>
+                  <Title>{news.title}</Title>
+                  <Summary>{`${news.description
+                    .substring(0, 100)
+                    .replace(/<\/?[^>]+(>|$)/g, " ")
+                    .replace("&nbsp;", " ")}...`}</Summary>
+                  <Button
+                    onClick={() => {
+                      fetch(`/api/${news._id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      }).then((result) => {
+                        return result.json();
+                      });
 
-                    history.push(`/news/${news._id}`);
-                  }}
-                >
-                  Read more
-                </Button>
-              </DetailsSection>
-            </Wrapper>
-          );
-        })
+                      history.push(`/news/${news._id}`);
+                    }}
+                  >
+                    Read more
+                  </Button>
+                </DetailsSection>
+              </Wrapper>
+            );
+          })
+        ) : (
+          <H3>Sorry! We couldn't find any news regarding "{searchContent}"</H3>
+        )
       ) : (
         <Spinner />
       )}
@@ -80,13 +89,13 @@ const ProductsSectionTitle = styled.div`
   align-items: center;
   justify-content: center;
   font-family: "Poppins", sans-serif;
-  text-transform: uppercase;
   margin-top: 10px;
-  & h2 {
+  & h4 {
     font-weight: 400;
     z-index: 1;
     background-color: #fff;
     padding: 0 30px;
+    text-transform: uppercase;
   }
 `;
 
@@ -142,6 +151,14 @@ const Button = styled.button`
     color: white;
     transition: all 400ms ease;
   }
+`;
+
+const H3 = styled.h2`
+  padding: 20px;
+  text-align: center;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  color: darkgray;
 `;
 
 export default SearchPage;

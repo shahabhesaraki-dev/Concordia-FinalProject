@@ -30,7 +30,8 @@ const AllNews = () => {
                 <Title>{news.title}</Title>
                 <Summary>{`${news.description
                   .substring(0, 100)
-                  .replace(/<\/?[^>]+(>|$)/g, "")}...`}</Summary>
+                  .replace(/<\/?[^>]+(>|$)/g, " ")
+                  .replace("&nbsp;", " ")}...`}</Summary>
                 <Button
                   onClick={() => {
                     fetch(`/api/${news._id}`, {

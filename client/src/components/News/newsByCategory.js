@@ -40,7 +40,8 @@ const NewsByCategory = () => {
                 <Title>{news.title}</Title>
                 <Summary>{`${news.description
                   .substring(0, 200)
-                  .replace(/<\/?[^>]+(>|$)/g, "")}...`}</Summary>
+                  .replace(/<\/?[^>]+(>|$)/g, " ")
+                  .replace("&nbsp;", " ")}...`}</Summary>
                 <Button
                   onClick={() => {
                     fetch(`/api/${news._id}`, {

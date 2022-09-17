@@ -454,22 +454,21 @@ const searchedNews = async (req, res) => {
     const db = client.db("final-project");
     const result = await db
       .collection("news")
-      .find({ title: { $regex: searchContent, $options: "i" } })
+      .find({
+        $or: [
+          { description: { $regex: searchContent, $options: "i" } },
+          { title: { $regex: searchContent, $options: "i" } },
+        ],
+      })
       .toArray();
 
     client.close();
 
-    result.length > 0
-      ? res.status(200).json({
-          status: 200,
-          data: result,
-          message: `News found!`,
-        })
-      : res.status(404).json({
-          status: 404,
-          data: `search content: ${searchContent}`,
-          message: `Couldn't find any news!`,
-        });
+    res.status(200).json({
+      status: 200,
+      data: result,
+      message: `News found!`,
+    });
   } catch (err) {
     console.log("Error: ", err);
   }

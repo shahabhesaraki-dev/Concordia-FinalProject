@@ -42,7 +42,8 @@ const LastNews = () => {
               <Title>{news.title}</Title>
               <Summary>{`${news.description
                 .substring(0, 100)
-                .replace(/<\/?[^>]+(>|$)/g, "")}...`}</Summary>
+                .replace(/<\/?[^>]+(>|$)/g, " ")
+                .replace("&nbsp;", " ")}...`}</Summary>
             </NewsSection>
           );
         })

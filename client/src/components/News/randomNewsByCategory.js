@@ -88,8 +88,7 @@ const Title = styled.h4`
 `;
 
 const NoNews = styled.h4`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Open Sans;
   margin-left: 40px;
   width: 80%;
   text-align: center;

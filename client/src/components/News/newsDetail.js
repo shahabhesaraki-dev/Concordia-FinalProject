@@ -97,7 +97,7 @@ const Image = styled.img`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   color: gray;
   min-width: 400px;
 `;
@@ -149,8 +149,8 @@ const H4 = styled.h4`
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 2px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Open Sans;
+  font-size: 15px;
   color: grey;
   width: 40%;
   text-align: center;

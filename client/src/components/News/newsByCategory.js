@@ -116,7 +116,7 @@ const DetailsSection = styled.div`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   color: gray;
 `;
 

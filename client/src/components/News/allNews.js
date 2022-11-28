@@ -13,7 +13,7 @@ const AllNews = () => {
     <>
       <Header />
       <ProductsSectionTitle>
-        <h2>All News</h2>
+        <H1>All News</H1>
         <Line />
       </ProductsSectionTitle>
       {allNews.length !== 0 ? (
@@ -74,7 +74,7 @@ const ProductsSectionTitle = styled.div`
   font-family: "Poppins", sans-serif;
   text-transform: uppercase;
   margin-top: 10px;
-  & h2 {
+  & h1 {
     font-weight: 400;
     z-index: 1;
     background-color: #fff;
@@ -106,7 +106,7 @@ const DetailsSection = styled.div`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   color: gray;
 `;
 
@@ -120,6 +120,8 @@ const Summary = styled.p`
 `;
 
 const Button = styled.button`
+  font-family: Abel;
+  font-size: 19px !important;
   width: 120px;
   height: 45px;
   padding: 5px;
@@ -134,6 +136,11 @@ const Button = styled.button`
     color: white;
     transition: all 400ms ease;
   }
+`;
+
+const H1 = styled.h1`
+  font-family: Acme;
+  font-size: 30px;
 `;
 
 export default AllNews;

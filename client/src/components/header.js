@@ -2,30 +2,13 @@ import styled from "styled-components";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import logo from "../assets/CBC-News-Logo.jpg";
 import { AllContext } from "./Context/allContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import AuthNav from "../components/Auth/auth-nav";
 
 const Header = () => {
   const history = useHistory();
-  const { categories } = useContext(AllContext);
-  const [speceficUser, setSpeceficUser] = useState();
+  const { categories, speceficUser } = useContext(AllContext);
   const [serachInput, setSearchInput] = useState();
-
-  const userId = JSON.parse(localStorage.getItem("userID"));
-
-  useEffect(() => {
-    if (userId) {
-      const getUserFromDb = async () => {
-        const response = await fetch(`/api/user/${userId.id}`);
-        const result = await response.json();
-        setSpeceficUser(result.data);
-      };
-      getUserFromDb();
-    } else {
-      return null;
-    }
-    // eslint-disable-next-line
-  }, [categories]);
 
   return (
     <Wrapper>
@@ -39,7 +22,7 @@ const Header = () => {
               onClick={() => {
                 window.localStorage.removeItem("newPost");
               }}
-              to="/dashboard/addNews"
+              to="/dashboard/home"
               style={{ color: "#eb1f28" }}
             >
               Dashboard
@@ -108,7 +91,8 @@ const LinkDiv = styled.div`
 const StyledLink = styled(NavLink)`
   text-decoration: none;
   color: #292929;
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
+  font-size: 17px;
   margin-left: 16px;
   letter-spacing: -0.05em;
   display: inline-block;
@@ -147,10 +131,11 @@ const SearchInput = styled.input`
   border-color: gray;
   outline: none;
   font-size: 14px;
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
 
   &::placeholder {
     color: #c1c1c1;
+    font-family: Open Sans;
   }
 `;
 

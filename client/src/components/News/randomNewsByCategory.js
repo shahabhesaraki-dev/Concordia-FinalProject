@@ -72,8 +72,7 @@ const Image = styled.img`
 `;
 
 const H2 = styled.h2`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Acme;
   font-size: 35px;
   text-align: center;
 `;

@@ -26,7 +26,7 @@ const SearchPage = () => {
     <>
       <Header />
       <ProductsSectionTitle>
-        <h4>Search results for "{searchContent}"</h4>
+        <H4>Search results for "{searchContent}"</H4>
         <Line />
       </ProductsSectionTitle>
       {searchedNews ? (
@@ -123,7 +123,7 @@ const DetailsSection = styled.div`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   color: gray;
 `;
 
@@ -137,6 +137,8 @@ const Summary = styled.p`
 `;
 
 const Button = styled.button`
+  font-family: Abel;
+  font-size: 19px !important;
   width: 120px;
   height: 45px;
   padding: 5px;
@@ -156,9 +158,13 @@ const Button = styled.button`
 const H3 = styled.h2`
   padding: 20px;
   text-align: center;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Open Sans;
   color: darkgray;
+`;
+
+const H4 = styled.h4`
+  font-family: Acme;
+  font-size: 20px;
 `;
 
 export default SearchPage;

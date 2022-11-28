@@ -125,17 +125,15 @@ const CommentSection = styled.div`
 `;
 
 const Label = styled.label`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-weight: 200;
-  font-size: 18px;
+  font-family: Abel;
+  font-weight: 600;
+  font-size: 19px;
   margin-left: 20px;
   margin-top: 5px;
 `;
 
 const Input = styled.input`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Open Sans;
   width: 50%;
   padding: 10px;
   margin-left: 20px;
@@ -147,8 +145,7 @@ const Input = styled.input`
 `;
 
 const Textarea = styled.textarea`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Open Sans;
   width: 50%;
   padding: 10px;
   margin-left: 20px;
@@ -159,8 +156,7 @@ const Textarea = styled.textarea`
 `;
 
 const Button = styled.button`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Abel;
   padding: 10px 40px;
   width: 140px;
   text-align: center;
@@ -171,12 +167,12 @@ const Button = styled.button`
   font-size: 20px;
   margin-left: 25px;
   margin-top: 20px;
+  cursor: pointer;
 `;
 
 const Title = styled.h2`
-  font-size: 30px;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Acme;
+  font-size: 32px;
   text-align: center;
 `;
 
@@ -200,8 +196,8 @@ const ContentDiv = styled.div`
 `;
 
 const Warning = styled.h4`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
+  font-family: Abel;
   color: red;
+  margin-left: 20px;
 `;
 export default Comments;

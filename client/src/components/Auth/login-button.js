@@ -9,6 +9,8 @@ const LoginButton = () => {
 };
 
 const Button = styled.button`
+  font-family: Abel;
+  font-size: 19px !important;
   width: 80px;
   height: 41px;
   margin-top: -21px;

@@ -25,6 +25,8 @@ const {
   getCommentsByPostId,
   searchedNews,
   getRandomNewsByCategory,
+  deleteNews,
+  editNews,
 } = require("./handler");
 
 const PORT = 8000;
@@ -66,4 +68,6 @@ express()
   .get("/api/getCommentsByPostId/:id", getCommentsByPostId)
   .get("/api/searchedNews/:searchContent", searchedNews)
   .get("/api/getRandomNewsByCategory/:category", getRandomNewsByCategory)
+  .delete("/api/delete/:newsId", deleteNews)
+  .patch("/api/editNews/:id", upload.single("file"), editNews)
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

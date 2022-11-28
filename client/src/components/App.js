@@ -3,11 +3,14 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import styled from "styled-components";
 import Homepage from "./Homepage/home";
 import Auth0ProviderWithHistory from "./Context/auth0Context";
-import AddNews from "./Dashboard/addNews";
 import AllNews from "./News/allNews";
 import NewsDetail from "./News/newsDetail";
 import NewsByCategory from "./News/newsByCategory";
 import SearchPage from "./Search/searchPage";
+import DashHome from "./Dashboard/dashHome";
+import DashAddNews from "./Dashboard/dashAddNews";
+import DashAllNews from "./Dashboard/dashAllNews";
+import DashEditNews from "./Dashboard/dashEditNews";
 
 const App = () => {
   return (
@@ -28,7 +31,16 @@ const App = () => {
               <NewsByCategory />
             </Route>
             <Route path="/dashboard/addNews">
-              <AddNews />
+              <DashAddNews />
+            </Route>
+            <Route path="/dashboard/home">
+              <DashHome />
+            </Route>
+            <Route path="/dashboard/allNews">
+              <DashAllNews />
+            </Route>
+            <Route path="/dashboard/editNews">
+              <DashEditNews />
             </Route>
             <Route path="/search/:searchContent">
               <SearchPage />

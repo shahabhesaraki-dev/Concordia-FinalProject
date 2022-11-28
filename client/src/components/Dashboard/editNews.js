@@ -1,38 +1,56 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { useHistory } from "react-router-dom";
 
-const AddNews = () => {
+const EditNews = ({ id }) => {
   const history = useHistory();
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [description, setDescription] = useState("");
   const [file, setFile] = useState();
 
-  const newPostApproved = localStorage.getItem("newPost");
+  useEffect(() => {
+    const getNewsById = async () => {
+      const respond = await fetch(`/api/getNews/${id}`);
+      const result = await respond.json();
+      setTitle(result.data.title);
+      setCategory(result.data.category);
+      setDescription(result.data.description);
+      setFile(result.data.image);
+    };
+    getNewsById();
+    // eslint-disable-next-line
+  }, [id]);
 
-  const postNews = () => {
+  console.log("TITLE", title);
+  console.log("CATEGORY", category);
+  console.log("DESCRIPT", description);
+  console.log("FILE", file);
+
+  const editNews = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("category", category);
     formData.append("description", description);
     formData.append("file", file);
 
-    fetch("/api/dashboard/addNews", {
-      method: "POST",
+    fetch(`/api/editNews/${id}`, {
+      method: "PATCH",
       body: formData,
     })
       .then((response) => {
         return response.json();
       })
       .then((result) => {
-        localStorage.setItem("newPost", JSON.stringify(result.reservedId));
         return result;
       })
       .then(() => {
         history.push("/dashboard/allNews");
+      })
+      .then(() => {
         window.location.reload();
       });
   };
@@ -40,10 +58,7 @@ const AddNews = () => {
   return (
     <>
       <Wrapper>
-        <Title>Add News</Title>
-        {newPostApproved ? (
-          <Success>A new post was successfully published.</Success>
-        ) : null}
+        <Title>Edit News</Title>
         <Label>Title</Label>
         <Input
           type="text"
@@ -74,14 +89,15 @@ const AddNews = () => {
             setFile(e.target.files[0]);
           }}
         />
+        {typeof file === "string" ? <Image src={`/image/${file}`} /> : null}
         {title.length !== 0 &&
         category.length !== 0 &&
         description.length !== 0 &&
         file ? (
-          <Button onClick={postNews}>Submit</Button>
+          <Button onClick={editNews}>Update</Button>
         ) : (
           <>
-            <Button>Submit</Button>
+            <Button>Update</Button>
             <Warning>*All the fields are required!</Warning>
           </>
         )}
@@ -147,7 +163,6 @@ const FileInput = styled.input`
 `;
 
 const StyledReactQuill = styled(ReactQuill)`
-  font-family: Abel;
   width: 90%;
   margin-left: 20px;
   margin-top: 10px;
@@ -176,9 +191,10 @@ const Warning = styled.h4`
   color: red;
 `;
 
-const Success = styled.h4`
-  font-family: Abel;
-  color: green;
+const Image = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-left: 30px;
 `;
 
-export default AddNews;
+export default EditNews;

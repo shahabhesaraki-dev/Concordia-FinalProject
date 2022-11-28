@@ -141,9 +141,8 @@ const Line = styled.hr`
 `;
 
 const H2 = styled.h2`
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
-    "Lucida Sans", Arial, sans-serif;
-  font-size: 25px;
+  font-family: Acme;
+  font-size: 28px;
 `;
 
 const H4 = styled.h4`

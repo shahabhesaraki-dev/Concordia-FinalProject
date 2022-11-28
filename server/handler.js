@@ -378,8 +378,6 @@ const addComment = async (req, res) => {
   const comment = req.body.comment;
   const postId = req.body.postId;
 
-  console.log(postId);
-
   const client = new MongoClient(MONGO_URI, options);
   try {
     await client.connect();
@@ -511,6 +509,73 @@ const getRandomNewsByCategory = async (req, res) => {
   }
 };
 
+const deleteNews = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  const { newsId } = req.params;
+
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db
+      .collection("news")
+      .deleteOne({ _id: ObjectId(newsId) });
+    if (result.deletedCount === 1) {
+      res
+        .status(200)
+        .json({ status: 200, message: "News successfully removed" });
+    }
+    client.close();
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
+const editNews = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+
+  const { id } = req.params;
+
+  const file = req.file;
+
+  const resultKey = [];
+
+  if (file) {
+    const result = await uploadFile(file);
+    await unlinkFile(file.path);
+    resultKey.push(result.key);
+  } else {
+    resultKey.push(req.body.file);
+  }
+
+  const newsData = {
+    title: req.body.title,
+    description: req.body.description,
+    image: resultKey[0],
+    category: req.body.category,
+  };
+
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+
+    const update = await db
+      .collection("news")
+      .updateOne({ _id: ObjectId(id) }, { $set: newsData });
+
+    if (update.modifiedCount === 1) {
+      res.status(200).json({
+        status: 200,
+        message: "News updated!",
+        data: newsData,
+      });
+    }
+    client.close();
+  } catch (err) {
+    console.log("Error :", err);
+  }
+};
+
 module.exports = {
   getAllNews,
   addNews,
@@ -530,4 +595,6 @@ module.exports = {
   getCommentsByPostId,
   searchedNews,
   getRandomNewsByCategory,
+  deleteNews,
+  editNews,
 };

@@ -110,7 +110,7 @@ const MinusButton = styled.button`
 `;
 
 const Title = styled.h3`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   position: absolute;
   top: 58%;
   left: 15%;
@@ -126,7 +126,7 @@ const Image = styled.img`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Open Sans;
   position: absolute;
   top: 54%;
   left: 15%;

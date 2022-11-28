@@ -60,18 +60,20 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
+  font-family: Abel;
+  font-size: 19px !important;
   width: 150px;
   height: 50px;
   position: absolute;
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
   opacity: 0;
   border: none;
   border-radius: 5px;
   font-size: 17px;
   font-weight: 300;
+  cursor: pointer;
 
   &:hover {
     background-color: gray;
@@ -81,7 +83,8 @@ const Button = styled.button`
 `;
 
 const Category = styled.h4`
-  font-family: "Poppins", sans-serif;
+  font-family: Abel;
+  font-size: 18px;
   color: gray;
 `;
 

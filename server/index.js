@@ -29,7 +29,7 @@ const {
   editNews,
 } = require("./handler");
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 express()
   .use(function (req, res, next) {
@@ -70,4 +70,5 @@ express()
   .get("/api/getRandomNewsByCategory/:category", getRandomNewsByCategory)
   .delete("/api/delete/:newsId", deleteNews)
   .patch("/api/editNews/:id", upload.single("file"), editNews)
+
   .listen(PORT, () => console.info(`Listening on port ${PORT}`));

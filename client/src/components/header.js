@@ -2,33 +2,33 @@ import styled from "styled-components";
 import { NavLink, Link, useHistory } from "react-router-dom";
 import logo from "../assets/CBC-News-Logo.jpg";
 import { AllContext } from "./Context/allContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 // import AuthNav from "../components/Auth/auth-nav";
 import LoginButton from "./Auth/login-button";
 import LogoutButton from "./Auth/logout-button";
 
 const Header = () => {
   const history = useHistory();
-  const { categories } = useContext(AllContext);
+  const { categories, speceficUser } = useContext(AllContext);
   const [serachInput, setSearchInput] = useState();
-  const [speceficUser, setSpeceficUser] = useState();
+  // const [speceficUser, setSpeceficUser] = useState();
 
   const isLogin = window.localStorage.getItem("LogIn");
-  const userId = JSON.parse(localStorage.getItem("userID"));
+  // const userId = JSON.parse(localStorage.getItem("userID"));
 
-  useEffect(() => {
-    if (userId) {
-      const getUserFromDb = async () => {
-        const response = await fetch(
-          `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
-        );
-        const result = await response.json();
-        setSpeceficUser(result.data);
-      };
-      getUserFromDb();
-    }
-    // eslint-disable-next-line
-  }, [categories]);
+  // useEffect(() => {
+  //   if (userId) {
+  //     const getUserFromDb = async () => {
+  //       const response = await fetch(
+  //         `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
+  //       );
+  //       const result = await response.json();
+  //       setSpeceficUser(result.data);
+  //     };
+  //     getUserFromDb();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [categories]);
 
   return (
     <Wrapper>

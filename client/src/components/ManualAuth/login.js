@@ -25,7 +25,7 @@ const ManualLogIn = () => {
       })
       .then((result) => {
         if (result.status === 200) {
-          localStorage.setItem("userId", JSON.stringify(result.id));
+          localStorage.setItem("userID", JSON.stringify({ id: result.id }));
           localStorage.setItem("LogIn", JSON.stringify({ user: "logIn" }));
           history.push("/");
           window.location.reload();

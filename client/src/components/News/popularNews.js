@@ -7,11 +7,13 @@ const PopularNews = () => {
   const history = useHistory();
   const [popularNews, setPopularNews] = useState([]);
   useEffect(() => {
-    fetch("/api/getNewsByViews").then((response) => {
-      return response.json().then((result) => {
-        setPopularNews(result.data);
-      });
-    });
+    fetch("https://mynewsprojectapp.herokuapp.com/api/getNewsByViews").then(
+      (response) => {
+        return response.json().then((result) => {
+          setPopularNews(result.data);
+        });
+      }
+    );
   }, []);
   return (
     <Wrapper>

@@ -14,7 +14,9 @@ const Slider = () => {
 
   useEffect(() => {
     const getRandomNews = async () => {
-      const response = await fetch(`/api/getRandomNews`);
+      const response = await fetch(
+        `https://mynewsprojectapp.herokuapp.com/api/getRandomNews`
+      );
       const result = await response.json();
       setRandomNews(result.data);
     };
@@ -50,12 +52,15 @@ const Slider = () => {
           <Image
             src={`/image/${randomNews[currentIndex].image}`}
             onClick={() => {
-              fetch(`/api/${randomNews[currentIndex]._id}`, {
-                method: "PATCH",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              }).then((result) => {
+              fetch(
+                `https://mynewsprojectapp.herokuapp.com/api/${randomNews[currentIndex]._id}`,
+                {
+                  method: "PATCH",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                }
+              ).then((result) => {
                 return result.json();
               });
 

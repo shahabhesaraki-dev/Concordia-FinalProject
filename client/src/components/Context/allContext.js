@@ -13,28 +13,36 @@ export const AllContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getAllNews = async () => {
-      const response = await fetch("/api/getAllNews");
+      const response = await fetch(
+        "https://mynewsprojectapp.herokuapp.com/api/getAllNews"
+      );
       const result = await response.json();
       setAllNews(result.data);
     };
     getAllNews();
 
     const getAllCategories = async () => {
-      const response = await fetch("/api/getCategories");
+      const response = await fetch(
+        "https://mynewsprojectapp.herokuapp.com/api/getCategories"
+      );
       const result = await response.json();
       setAllCategories(result.data);
     };
     getAllCategories();
 
     const getAllUsers = async () => {
-      const response = await fetch("/api/users");
+      const response = await fetch(
+        "https://mynewsprojectapp.herokuapp.com/api/users"
+      );
       const result = await response.json();
       setAllUsers(result.data);
     };
     getAllUsers();
 
     const getAllComments = async () => {
-      const response = await fetch("/api/getComments");
+      const response = await fetch(
+        "https://mynewsprojectapp.herokuapp.com/api/getComments"
+      );
       const result = await response.json();
       setAllComments(result.data);
     };
@@ -45,7 +53,9 @@ export const AllContextProvider = ({ children }) => {
 
   useEffect(() => {
     const getUserFromDb = async () => {
-      const response = await fetch(`/api/user/${userId.id}`);
+      const response = await fetch(
+        `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
+      );
       const result = await response.json();
       setSpeceficUser(result.data);
     };

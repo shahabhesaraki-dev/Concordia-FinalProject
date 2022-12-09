@@ -8,11 +8,13 @@ const LastNews = () => {
   const [lastNews, setLastNews] = useState([]);
 
   useEffect(() => {
-    fetch("/api/getLastNews").then((response) => {
-      return response.json().then((result) => {
-        setLastNews(result.data);
-      });
-    });
+    fetch("https://mynewsprojectapp.herokuapp.com/api/getLastNews").then(
+      (response) => {
+        return response.json().then((result) => {
+          setLastNews(result.data);
+        });
+      }
+    );
   }, []);
 
   return (

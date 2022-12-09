@@ -2,6 +2,7 @@
 
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
@@ -33,6 +34,7 @@ const {
 const PORT = process.env.PORT || 8000;
 
 express()
+  .use(cors({ origin: "https://mynewsapplication.netlify.app" }))
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",

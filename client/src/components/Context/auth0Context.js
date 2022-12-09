@@ -9,9 +9,7 @@ const Auth0ProviderWithHistory = ({ children }) => {
   const history = useHistory();
 
   const onRedirectCallback = (appState) => {
-    history.push(
-      appState?.returnTo || "https://mynewsprojectapp.herokuapp.com"
-    );
+    history.push(appState?.returnTo || window.location.pathname);
   };
 
   return (

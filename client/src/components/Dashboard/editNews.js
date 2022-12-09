@@ -50,7 +50,7 @@ const EditNews = ({ id }) => {
         return result;
       })
       .then(() => {
-        history.push("/dashboard/allNews");
+        history.push("/");
       })
       .then(() => {
         window.location.reload();

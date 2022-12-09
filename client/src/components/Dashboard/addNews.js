@@ -32,7 +32,7 @@ const AddNews = () => {
         return result;
       })
       .then(() => {
-        history.push("/dashboard/allNews");
+        history.push("/");
         window.location.reload();
       });
   };

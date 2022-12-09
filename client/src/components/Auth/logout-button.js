@@ -1,17 +1,18 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { useAuth0 } from "@auth0/auth0-react";
+// import { useAuth0 } from "@auth0/auth0-react";
 
 const LogoutButton = () => {
-  const { logout } = useAuth0();
+  const history = useHistory();
+  // const { logout } = useAuth0();
   return (
     <Button
       onClick={() => {
         window.localStorage.removeItem("LogIn");
         window.localStorage.removeItem("userID");
-        logout({
-          returnTo: window.location.origin,
-        });
+        history.push("/");
+        window.location.reload();
       }}
     >
       Log Out

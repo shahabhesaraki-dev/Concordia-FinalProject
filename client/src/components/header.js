@@ -3,12 +3,16 @@ import { NavLink, Link, useHistory } from "react-router-dom";
 import logo from "../assets/CBC-News-Logo.jpg";
 import { AllContext } from "./Context/allContext";
 import { useContext, useState } from "react";
-import AuthNav from "../components/Auth/auth-nav";
+// import AuthNav from "../components/Auth/auth-nav";
+import LoginButton from "./Auth/login-button";
+import LogoutButton from "./Auth/logout-button";
 
 const Header = () => {
   const history = useHistory();
   const { categories, speceficUser } = useContext(AllContext);
   const [serachInput, setSearchInput] = useState();
+
+  const isLogin = window.localStorage.getItem("LogIn");
 
   return (
     <Wrapper>
@@ -61,7 +65,7 @@ const Header = () => {
           }}
         />
       </SearchContainer>
-      <AuthNav />
+      {isLogin ? <LogoutButton /> : <LoginButton />}
     </Wrapper>
   );
 };

@@ -12,13 +12,13 @@ const Auth0ProviderWithHistory = ({ children }) => {
     history.push(appState?.returnTo || window.location.pathname);
   };
 
+  const url = "https://mynewsprojectapp.herokuapp.com";
+
   return (
     <Auth0Provider
       domain={domain}
       clientId={clientId}
-      redirectUri={
-        window.location.origin || "https://mynewsprojectapp.herokuapp.com"
-      }
+      redirectUri={url}
       onRedirectCallback={onRedirectCallback}
     >
       {children}

@@ -50,7 +50,7 @@ const Slider = () => {
       {randomNews ? (
         <Wrapper>
           <Image
-            src={`/image/${randomNews[currentIndex].image}`}
+            src={`https://mynewsprojectapp.herokuapp.com/image/${randomNews[currentIndex].image}`}
             onClick={() => {
               fetch(
                 `https://mynewsprojectapp.herokuapp.com/api/${randomNews[currentIndex]._id}`,

@@ -21,7 +21,9 @@ const PopularNews = () => {
         popularNews.map((news, index) => {
           return (
             <NewsSection key={index}>
-              <Image src={`/image/${news.image}`} />
+              <Image
+                src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
+              />
               <Button
                 onClick={() => {
                   fetch(

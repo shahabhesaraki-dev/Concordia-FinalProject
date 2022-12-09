@@ -124,8 +124,7 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;
-  margin-left: 20px;
-  border: 1px solid #eb1f2a;
+  border: 1px solid #90caea;
   padding: 30px;
   border-radius: 10px;
 `;
@@ -138,7 +137,7 @@ const Input = styled.input`
   outline: none;
   border-radius: 10px;
   padding: 0 0 0 15px;
-  border: 2px solid #825e3a;
+  border: 2px solid #90caea;
   font-family: "Abel";
   font-size: 20px;
   color: #240d01;
@@ -162,10 +161,9 @@ const Input = styled.input`
 const SigninButton = styled.button`
   height: 50px;
   width: 200px;
-  margin: auto;
   font-size: 18px;
+  margin: auto;
   margin-top: 25px;
-  margin-left: 5px;
   outline: none;
   border-radius: 10px;
   font-family: "Abel";

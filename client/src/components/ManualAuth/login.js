@@ -41,7 +41,7 @@ const ManualLogIn = () => {
     <Section>
       <Header />
       <FormSection>
-        <Title>Join and take care of animals</Title>
+        <Title>Join to our commiunity</Title>
 
         <InputBox>
           {error.length !== 0 ? <Error>{`* ${error}`}</Error> : null}
@@ -108,7 +108,7 @@ const FormSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 100%;
   padding: 60px 10px;
 `;
 
@@ -116,24 +116,27 @@ const Title = styled.h1`
   font-family: "Acme";
   font-size: 55px;
   text-align: center;
-  margin-top: 50px;
-  color: #5f4024;
+  margin-top: 30px;
+  color: black;
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
+  margin-top: 50px;
   margin-left: 20px;
+  border: 1px solid #eb1f2a;
+  padding: 30px;
+  border-radius: 10px;
 `;
 
 const Input = styled.input`
   height: 50px;
-  width: 50%;
+  width: 400px;
   font-size: 18px;
   margin-top: 10px;
   outline: none;
-  border-radius: 30px;
+  border-radius: 10px;
   padding: 0 0 0 15px;
   border: 2px solid #825e3a;
   font-family: "Abel";
@@ -158,17 +161,18 @@ const Input = styled.input`
 
 const SigninButton = styled.button`
   height: 50px;
-  width: 40%;
+  width: 200px;
+  margin: auto;
   font-size: 18px;
   margin-top: 25px;
   margin-left: 5px;
   outline: none;
-  border-radius: 30px;
+  border-radius: 10px;
   font-family: "Abel";
   font-size: 21px;
-  background-color: #825e3a;
+  background-color: #90caea;
   border: none;
-  color: white;
+  color: black;
   &:hover:enabled {
     background-color: #240d01;
     transition: 200ms ease-in-out;

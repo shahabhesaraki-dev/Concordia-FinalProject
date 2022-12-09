@@ -34,12 +34,15 @@ const AllNews = () => {
                   .replace("&nbsp;", " ")}...`}</Summary>
                 <Button
                   onClick={() => {
-                    fetch(`/api/${news._id}`, {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    }).then((result) => {
+                    fetch(
+                      `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
+                      {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      }
+                    ).then((result) => {
                       return result.json();
                     });
 

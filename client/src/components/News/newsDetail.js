@@ -15,7 +15,9 @@ const NewsDetail = () => {
 
   useEffect(() => {
     const getNewsById = async () => {
-      const response = await fetch(`/api/getNews/${id}`);
+      const response = await fetch(
+        `https://mynewsprojectapp.herokuapp.com/api/getNews/${id}`
+      );
       const result = await response.json();
       setSpeceficNews(result.data);
     };

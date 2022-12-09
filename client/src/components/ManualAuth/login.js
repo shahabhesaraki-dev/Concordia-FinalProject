@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import SignUp from "./signUp";
 import Header from "../header";
 
 const ManualLogIn = () => {
@@ -92,7 +91,13 @@ const ManualLogIn = () => {
         </InputBox>
         <SignupBox>
           <H2>Are you a new user?</H2>
-          <SignUp />
+          <SignUpButton
+            onClick={() => {
+              history.push("/signup");
+            }}
+          >
+            Sign up
+          </SignUpButton>
         </SignupBox>
       </FormSection>
     </Section>
@@ -124,7 +129,7 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 50px;
-  border: 1px solid #90caea;
+  border: 1px solid black;
   padding: 30px;
   border-radius: 10px;
 `;
@@ -137,7 +142,7 @@ const Input = styled.input`
   outline: none;
   border-radius: 10px;
   padding: 0 0 0 15px;
-  border: 2px solid #90caea;
+  border: 1px solid black;
   font-family: "Abel";
   font-size: 20px;
   color: #240d01;
@@ -146,7 +151,6 @@ const Input = styled.input`
     opacity: 0.5;
   }
   &:focus {
-    border: 2px solid #240d01;
     &::placeholder {
       position: absolute;
       transition: 400ms ease-in-out;
@@ -171,10 +175,7 @@ const SigninButton = styled.button`
   background-color: #90caea;
   border: none;
   color: black;
-  &:hover:enabled {
-    background-color: #240d01;
-    transition: 200ms ease-in-out;
-  }
+
   &:disabled {
     cursor: not-allowed;
     opacity: 0.6;
@@ -201,6 +202,21 @@ const Error = styled.h2`
   color: darkred;
   margin-left: 5px;
   margin-bottom: 5px;
+`;
+
+const SignUpButton = styled.button`
+  height: 50px;
+  width: 200px;
+  font-size: 18px;
+  margin: auto;
+  margin-top: 25px;
+  outline: none;
+  border-radius: 10px;
+  font-family: "Abel";
+  font-size: 21px;
+  background-color: #acdf87;
+  border: none;
+  color: black;
 `;
 
 export default ManualLogIn;

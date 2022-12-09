@@ -12,6 +12,7 @@ import DashAddNews from "./Dashboard/dashAddNews";
 import DashAllNews from "./Dashboard/dashAllNews";
 import DashEditNews from "./Dashboard/dashEditNews";
 import ManualLogIn from "./ManualAuth/login";
+import SignUp from "./ManualAuth/signUp";
 
 const App = () => {
   return (
@@ -30,6 +31,9 @@ const App = () => {
             </Route>
             <Route path="/login">
               <ManualLogIn />
+            </Route>
+            <Route path="/signup">
+              <SignUp />
             </Route>
             <Route path="/category/:categoryName">
               <NewsByCategory />

@@ -41,7 +41,7 @@ const ManualLogIn = () => {
     <Section>
       <Header />
       <FormSection>
-        <Title>Join to our commiunity</Title>
+        <Title>Login to your account</Title>
 
         <InputBox>
           {error.length !== 0 ? <Error>{`* ${error}`}</Error> : null}

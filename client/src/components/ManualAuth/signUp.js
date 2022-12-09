@@ -79,7 +79,7 @@ const SignUp = () => {
           splitEmail.includes("@") ? (
             <SigninButton onClick={signUpHandler}>Sign up</SigninButton>
           ) : (
-            <SigninButton disabled>Sign upn</SigninButton>
+            <SigninButton disabled>Sign up</SigninButton>
           )}
         </InputBox>
         <SignupBox>
@@ -165,7 +165,7 @@ const SigninButton = styled.button`
   border-radius: 10px;
   font-family: "Abel";
   font-size: 21px;
-  background-color: #90caea;
+  background-color: #acdf87;
   border: none;
   color: black;
   cursor: pointer;
@@ -198,7 +198,7 @@ const SignUpButton = styled.button`
   border-radius: 10px;
   font-family: "Abel";
   font-size: 21px;
-  background-color: #acdf87;
+  background-color: #90caea;
   border: none;
   color: black;
   cursor: pointer;

@@ -37,7 +37,7 @@ const EditNews = ({ id }) => {
     formData.append("description", description);
     formData.append("file", file);
 
-    fetch(`/api/editNews/${id}`, {
+    fetch(`https://mynewsprojectapp.herokuapp.com/api/editNews/${id}`, {
       method: "PATCH",
       body: formData,
     })

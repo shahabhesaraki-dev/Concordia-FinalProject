@@ -47,7 +47,7 @@ const RandomNewsByCategory = ({ category, id }) => {
                     history.push(`/news/${news._id}`);
                     window.location.reload();
                   }}
-                  src={`/image/${news.image}`}
+                  src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
                 />
                 <Title>{news.title}</Title>
               </div>

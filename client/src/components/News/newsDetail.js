@@ -32,7 +32,9 @@ const NewsDetail = () => {
         {speceficNews ? (
           <SpeceficNewsSection>
             <Title>{speceficNews.title}</Title>
-            <Image src={`/image/${speceficNews.image}`} />
+            <Image
+              src={`https://mynewsprojectapp.herokuapp.com/image/${speceficNews.image}`}
+            />
             <Category>{speceficNews.category}</Category>
             <Description
               dangerouslySetInnerHTML={{ __html: speceficNews.description }}

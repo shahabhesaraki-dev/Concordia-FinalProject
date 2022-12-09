@@ -22,7 +22,9 @@ const AllNews = () => {
             <Wrapper key={index}>
               <ImageSection>
                 <Link to={`/news/${news._id}`}>
-                  <Image src={`/image/${news.image}`} />
+                  <Image
+                    src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
+                  />
                 </Link>
               </ImageSection>
               <DetailsSection>

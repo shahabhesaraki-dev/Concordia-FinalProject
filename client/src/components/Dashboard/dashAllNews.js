@@ -34,7 +34,9 @@ const DashAddNews = () => {
                       return (
                         <tr key={index}>
                           <TD>
-                            <Imgage src={`/image/${news.image}`} />
+                            <Imgage
+                              src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
+                            />
                           </TD>
                           <TD>{news.title}</TD>
                           <TD style={{ textAlign: "center" }}>
@@ -53,12 +55,15 @@ const DashAddNews = () => {
                             </Edit>
                             <Delete
                               onClick={() => {
-                                fetch(`/api/delete/${news._id}`, {
-                                  method: "Delete",
-                                  headers: {
-                                    "Content-Type": "application/json",
-                                  },
-                                })
+                                fetch(
+                                  `https://mynewsprojectapp.herokuapp.com/api/delete/${news._id}`,
+                                  {
+                                    method: "Delete",
+                                    headers: {
+                                      "Content-Type": "application/json",
+                                    },
+                                  }
+                                )
                                   .then((respond) => {
                                     respond.json();
                                   })

@@ -89,7 +89,9 @@ const EditNews = ({ id }) => {
             setFile(e.target.files[0]);
           }}
         />
-        {typeof file === "string" ? <Image src={`/image/${file}`} /> : null}
+        {typeof file === "string" ? (
+          <Image src={`https://mynewsprojectapp.herokuapp.com/image/${file}`} />
+        ) : null}
         {title.length !== 0 &&
         category.length !== 0 &&
         description.length !== 0 &&

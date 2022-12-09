@@ -291,7 +291,7 @@ const getUserById = async (req, res) => {
   try {
     await client.connect();
     const db = client.db("final-project");
-    const result = await db.collection("users").findOne({ _id: id });
+    const result = await db.collection("users").findOne({ _id: ObjectId(id) });
     client.close();
 
     result

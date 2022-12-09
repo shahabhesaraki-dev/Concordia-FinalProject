@@ -14,12 +14,13 @@ const Header = () => {
   const [speceficUser, setSpeceficUser] = useState();
 
   const isLogin = window.localStorage.getItem("LogIn");
+  const userId = JSON.parse(localStorage.getItem("userID"));
 
   useEffect(() => {
-    if (isLogin) {
+    if (userId) {
       const getUserFromDb = async () => {
         const response = await fetch(
-          `https://mynewsprojectapp.herokuapp.com/api/user/${isLogin}`
+          `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
         );
         const result = await response.json();
         setSpeceficUser(result.data);

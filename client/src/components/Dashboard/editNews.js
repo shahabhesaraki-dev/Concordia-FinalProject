@@ -14,7 +14,9 @@ const EditNews = ({ id }) => {
 
   useEffect(() => {
     const getNewsById = async () => {
-      const respond = await fetch(`/api/getNews/${id}`);
+      const respond = await fetch(
+        `https://mynewsprojectapp.herokuapp.com/api/getNews/${id}`
+      );
       const result = await respond.json();
       setTitle(result.data.title);
       setCategory(result.data.category);

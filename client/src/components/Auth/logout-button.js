@@ -31,6 +31,7 @@ const Button = styled.button`
   color: white;
   border: none;
   border-radius: 5px;
+  cursor: pointer;
   &:hover {
     font-size: 17px;
   }

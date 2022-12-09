@@ -8,7 +8,7 @@ const AuthenticationButton = () => {
 
   useEffect(() => {
     if (currentUser) {
-      fetch("/api/addNewUser", {
+      fetch("https://mynewsprojectapp.herokuapp.com/api/addNewUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

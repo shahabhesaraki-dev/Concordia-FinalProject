@@ -26,6 +26,7 @@ const ManualLogIn = () => {
       .then((result) => {
         if (result.status === 200) {
           localStorage.setItem("userId", JSON.stringify(result.id));
+          localStorage.setItem("LogIn", JSON.stringify({ user: "logIn" }));
           history.push("/");
           window.location.reload();
         } else {
@@ -114,6 +115,7 @@ const FormSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  margin-top: 60px;
 `;
 
 const Title = styled.h1`

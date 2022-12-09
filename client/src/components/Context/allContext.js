@@ -52,14 +52,16 @@ export const AllContextProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    const getUserFromDb = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
-      );
-      const result = await response.json();
-      setSpeceficUser(result.data);
-    };
-    getUserFromDb();
+    if (userId) {
+      const getUserFromDb = async () => {
+        const response = await fetch(
+          `https://mynewsprojectapp.herokuapp.com/api/user/${userId.id}`
+        );
+        const result = await response.json();
+        setSpeceficUser(result.data);
+      };
+      getUserFromDb();
+    }
     // eslint-disable-next-line
   }, [allUsers]);
 

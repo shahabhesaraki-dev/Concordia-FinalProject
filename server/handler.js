@@ -336,6 +336,39 @@ const addNewUser = async (req, res) => {
   }
 };
 
+const signIn = async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  const client = new MongoClient(MONGO_URI, options);
+  try {
+    await client.connect();
+    const db = client.db("final-project");
+    const result = await db.collection("users").findOne({ email: email });
+
+    if (result) {
+      if (password === result.password) {
+        res.status(200).json({
+          status: 200,
+          id: result._id,
+        });
+      } else {
+        res.status(404).json({
+          status: 404,
+          message: "Password is incorrect!",
+        });
+      }
+    } else {
+      res.status(404).json({
+        status: 404,
+        message: "We cannot find an account with that e-mail address!",
+      });
+    }
+  } catch (err) {
+    console.log("Error: ", err);
+  }
+};
+
 const getRandomNews = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
 
@@ -597,4 +630,5 @@ module.exports = {
   getRandomNewsByCategory,
   deleteNews,
   editNews,
+  signIn,
 };

@@ -10,7 +10,7 @@ const ManualLogIn = () => {
   const [error, setError] = useState("");
 
   const signInHandler = () => {
-    fetch("https://mynewsprojectapp.herokuapp.com/api/addNewUser", {
+    fetch("https://mynewsprojectapp.herokuapp.com/api/signIn", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",

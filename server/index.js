@@ -29,6 +29,7 @@ const {
   getRandomNewsByCategory,
   deleteNews,
   editNews,
+  signIn,
 } = require("./handler");
 
 const PORT = process.env.PORT || 8000;
@@ -73,6 +74,7 @@ express()
   .get("/api/getRandomNewsByCategory/:category", getRandomNewsByCategory)
   .delete("/api/delete/:newsId", deleteNews)
   .patch("/api/editNews/:id", upload.single("file"), editNews)
+  .post("/api/signIn", signIn)
 
   // this is our catch all endpoint.
   .get("*", (req, res) => {

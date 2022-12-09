@@ -114,21 +114,20 @@ const FormSection = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  padding: 60px 10px;
 `;
 
 const Title = styled.h1`
   font-family: "Acme";
   font-size: 55px;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 10px;
   color: black;
 `;
 
 const InputBox = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 50px;
+  margin-top: 20px;
   border: 1px solid black;
   padding: 30px;
   border-radius: 10px;
@@ -175,6 +174,7 @@ const SigninButton = styled.button`
   background-color: #90caea;
   border: none;
   color: black;
+  cursor: pointer;
 
   &:disabled {
     cursor: not-allowed;
@@ -185,15 +185,13 @@ const SigninButton = styled.button`
 const SignupBox = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  margin-top: 100px;
-  margin-left: 15px;
+  margin-top: 20px;
 `;
 
 const H2 = styled.h2`
   font-family: "Abel";
   font-size: 20px;
-  margin-left: 10px;
+  text-align: center;
 `;
 
 const Error = styled.h2`
@@ -209,7 +207,7 @@ const SignUpButton = styled.button`
   width: 200px;
   font-size: 18px;
   margin: auto;
-  margin-top: 25px;
+  margin-top: 10px;
   outline: none;
   border-radius: 10px;
   font-family: "Abel";
@@ -217,6 +215,7 @@ const SignUpButton = styled.button`
   background-color: #acdf87;
   border: none;
   color: black;
+  cursor: pointer;
 `;
 
 export default ManualLogIn;

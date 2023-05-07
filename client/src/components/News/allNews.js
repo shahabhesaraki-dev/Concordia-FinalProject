@@ -21,10 +21,8 @@ const AllNews = () => {
           return (
             <Wrapper key={index}>
               <ImageSection>
-                <Link to={`/news/${news._id}`}>
-                  <Image
-                    src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
-                  />
+                <Link to={`/api/news/${news._id}`}>
+                  <Image src={`/image/${news.image}`} />
                 </Link>
               </ImageSection>
               <DetailsSection>
@@ -36,15 +34,12 @@ const AllNews = () => {
                   .replace("&nbsp;", " ")}...`}</Summary>
                 <Button
                   onClick={() => {
-                    fetch(
-                      `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
-                      {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                      }
-                    ).then((result) => {
+                    fetch(`/api/${news._id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                    }).then((result) => {
                       return result.json();
                     });
 

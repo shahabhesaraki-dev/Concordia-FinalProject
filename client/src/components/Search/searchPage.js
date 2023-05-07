@@ -12,9 +12,7 @@ const SearchPage = () => {
 
   useEffect(() => {
     const getSearchItems = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/searchedNews/${searchContent}`
-      );
+      const response = await fetch(`/api/searchedNews/${searchContent}`);
       const result = await response.json();
       setSearchNews(result.data);
     };
@@ -38,9 +36,7 @@ const SearchPage = () => {
               <Wrapper key={index}>
                 <ImageSection>
                   <Link to={`/news/${news._id}`}>
-                    <Image
-                      src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
-                    />
+                    <Image src={`/image/${news.image}`} />
                   </Link>
                 </ImageSection>
                 <DetailsSection>
@@ -52,15 +48,12 @@ const SearchPage = () => {
                     .replace("&nbsp;", " ")}...`}</Summary>
                   <Button
                     onClick={() => {
-                      fetch(
-                        `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
-                        {
-                          method: "PATCH",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                        }
-                      ).then((result) => {
+                      fetch(`/api/${news._id}`, {
+                        method: "PATCH",
+                        headers: {
+                          "Content-Type": "application/json",
+                        },
+                      }).then((result) => {
                         return result.json();
                       });
 

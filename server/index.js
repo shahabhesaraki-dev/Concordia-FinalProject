@@ -32,10 +32,10 @@ const {
   signIn,
 } = require("./handler");
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8080;
 
 express()
-  .use(cors({ origin: "https://mynewsapplication.netlify.app" }))
+  .use(cors())
   .use(function (req, res, next) {
     res.header(
       "Access-Control-Allow-Methods",

@@ -9,7 +9,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
 
   const signUpHandler = () => {
-    fetch("https://mynewsprojectapp.herokuapp.com/api/addNewUser", {
+    fetch("/api/addNewUser", {
       method: "Post",
       headers: {
         "Content-Type": "application/json",

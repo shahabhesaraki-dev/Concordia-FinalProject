@@ -15,9 +15,7 @@ const NewsDetail = () => {
 
   useEffect(() => {
     const getNewsById = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/getNews/${id}`
-      );
+      const response = await fetch(`/api/getNews/${id}`);
       const result = await response.json();
       setSpeceficNews(result.data);
     };
@@ -32,9 +30,7 @@ const NewsDetail = () => {
         {speceficNews ? (
           <SpeceficNewsSection>
             <Title>{speceficNews.title}</Title>
-            <Image
-              src={`https://mynewsprojectapp.herokuapp.com/image/${speceficNews.image}`}
-            />
+            <Image src={`/image/${speceficNews.image}`} />
             <Category>{speceficNews.category}</Category>
             <Description
               dangerouslySetInnerHTML={{ __html: speceficNews.description }}

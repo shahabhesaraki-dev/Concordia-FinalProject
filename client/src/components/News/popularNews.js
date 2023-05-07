@@ -7,13 +7,11 @@ const PopularNews = () => {
   const history = useHistory();
   const [popularNews, setPopularNews] = useState([]);
   useEffect(() => {
-    fetch("https://mynewsprojectapp.herokuapp.com/api/getNewsByViews").then(
-      (response) => {
-        return response.json().then((result) => {
-          setPopularNews(result.data);
-        });
-      }
-    );
+    fetch("/api/getNewsByViews").then((response) => {
+      return response.json().then((result) => {
+        setPopularNews(result.data);
+      });
+    });
   }, []);
   return (
     <Wrapper>
@@ -21,20 +19,15 @@ const PopularNews = () => {
         popularNews.map((news, index) => {
           return (
             <NewsSection key={index}>
-              <Image
-                src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
-              />
+              <Image src={`/image/${news.image}`} />
               <Button
                 onClick={() => {
-                  fetch(
-                    `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
-                    {
-                      method: "PATCH",
-                      headers: {
-                        "Content-Type": "application/json",
-                      },
-                    }
-                  ).then((result) => {
+                  fetch(`/api/${news._id}`, {
+                    method: "PATCH",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                  }).then((result) => {
                     return result.json();
                   });
 

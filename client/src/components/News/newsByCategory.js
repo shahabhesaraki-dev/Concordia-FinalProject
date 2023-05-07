@@ -12,9 +12,7 @@ const NewsByCategory = () => {
 
   useEffect(() => {
     const getNewByCategory = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/category/${categoryName}`
-      );
+      const response = await fetch(`/api/category/${categoryName}`);
       const result = await response.json();
       setNewsByCtegory(result.data);
     };
@@ -34,9 +32,7 @@ const NewsByCategory = () => {
             <Wrapper key={index}>
               <ImageSection>
                 <Link to={`/news/${news._id}`}>
-                  <Image
-                    src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
-                  />
+                  <Image src={`/image/${news.image}`} />
                 </Link>
               </ImageSection>
               <DetailsSection>
@@ -48,15 +44,12 @@ const NewsByCategory = () => {
                   .replace("&nbsp;", " ")}...`}</Summary>
                 <Button
                   onClick={() => {
-                    fetch(
-                      `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
-                      {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                      }
-                    ).then((result) => {
+                    fetch(`/api/${news._id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                    }).then((result) => {
                       return result.json();
                     });
 

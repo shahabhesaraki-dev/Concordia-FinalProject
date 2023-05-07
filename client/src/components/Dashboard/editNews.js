@@ -14,9 +14,7 @@ const EditNews = ({ id }) => {
 
   useEffect(() => {
     const getNewsById = async () => {
-      const respond = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/getNews/${id}`
-      );
+      const respond = await fetch(`/api/getNews/${id}`);
       const result = await respond.json();
       setTitle(result.data.title);
       setCategory(result.data.category);
@@ -39,7 +37,7 @@ const EditNews = ({ id }) => {
     formData.append("description", description);
     formData.append("file", file);
 
-    fetch(`https://mynewsprojectapp.herokuapp.com/api/editNews/${id}`, {
+    fetch(`/api/editNews/${id}`, {
       method: "PATCH",
       body: formData,
     })
@@ -91,9 +89,7 @@ const EditNews = ({ id }) => {
             setFile(e.target.files[0]);
           }}
         />
-        {typeof file === "string" ? (
-          <Image src={`https://mynewsprojectapp.herokuapp.com/image/${file}`} />
-        ) : null}
+        {typeof file === "string" ? <Image src={`/image/${file}`} /> : null}
         {title.length !== 0 &&
         category.length !== 0 &&
         description.length !== 0 &&

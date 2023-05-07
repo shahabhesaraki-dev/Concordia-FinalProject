@@ -16,7 +16,7 @@ const Comments = ({ id }) => {
       postId: id,
     };
 
-    fetch("https://mynewsprojectapp.herokuapp.com/api/addComment", {
+    fetch("/api/addComment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,9 +34,7 @@ const Comments = ({ id }) => {
 
   useEffect(() => {
     const getCommentsByPostId = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/getCommentsByPostId/${id}`
-      );
+      const response = await fetch(`/api/getCommentsByPostId/${id}`);
       const result = await response.json();
       if (result.data) {
         setMessages(result.data);

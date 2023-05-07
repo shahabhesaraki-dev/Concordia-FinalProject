@@ -9,9 +9,7 @@ const RandomNewsByCategory = ({ category, id }) => {
 
   useEffect(() => {
     const getRandomNews = async () => {
-      const response = await fetch(
-        `https://mynewsprojectapp.herokuapp.com/api/getRandomNewsByCategory/${category}`
-      );
+      const response = await fetch(`/api/getRandomNewsByCategory/${category}`);
       const result = await response.json();
       setAllNewsByCategory(result.data);
     };
@@ -32,22 +30,19 @@ const RandomNewsByCategory = ({ category, id }) => {
               <div key={index}>
                 <Image
                   onClick={() => {
-                    fetch(
-                      `https://mynewsprojectapp.herokuapp.com/api/${news._id}`,
-                      {
-                        method: "PATCH",
-                        headers: {
-                          "Content-Type": "application/json",
-                        },
-                      }
-                    ).then((result) => {
+                    fetch(`/api/${news._id}`, {
+                      method: "PATCH",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                    }).then((result) => {
                       return result.json();
                     });
 
                     history.push(`/news/${news._id}`);
                     window.location.reload();
                   }}
-                  src={`https://mynewsprojectapp.herokuapp.com/image/${news.image}`}
+                  src={`/image/${news.image}`}
                 />
                 <Title>{news.title}</Title>
               </div>

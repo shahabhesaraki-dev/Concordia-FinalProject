@@ -20,7 +20,7 @@ const AddNews = () => {
     formData.append("description", description);
     formData.append("file", file);
 
-    fetch("https://mynewsprojectapp.herokuapp.com/api/dashboard/addNews", {
+    fetch("/api/dashboard/addNews", {
       method: "POST",
       body: formData,
     })
